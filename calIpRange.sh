@@ -18,9 +18,9 @@ set -eu
 IP_MASK=$1
 IP=`echo $IP_MASK |sed -En 's/^(.*)\/([0-9]{1,2})/\1/p'`
 NET_MASK=`echo $IP_MASK |sed -En 's/^(.*)\/([0-9]{1,2})/\2/p'`
-echo IP_MASK=$IP_MASK
-echo IP=$IP
-echo NET_MASK=$NET_MASK
+#echo IP_MASK=$IP_MASK
+#echo IP=$IP
+#echo NET_MASK=$NET_MASK
 if [[ ! $IP =~ ^((1?[0-9]{1,2}|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9]{1,2}|2[0-4][0-9]|25[0-5])$ ]];then
    echo  "Ip address $IP is invalid . Useage: ip/mask" 
    exit 2
@@ -46,23 +46,23 @@ IP_SUB3=`echo $IP |cut -d. -f3`
 IP_INDEX=`echo $[$NET_MASK/8+1]`
 IP_SUB=`echo $IP |cut -d. -f$IP_INDEX`
 IP_SUB_BINARY=`echo "obase=2;$IP_SUB" |bc |xargs printf "%08d"`
-echo IP_INDEX=$IP_INDEX
-echo IP_SUB=$IP_SUB
-echo IP_SUB_BINARY=$IP_SUB_BINARY
+#echo IP_INDEX=$IP_INDEX
+#echo IP_SUB=$IP_SUB
+#echo IP_SUB_BINARY=$IP_SUB_BINARY
 IP_SUB_NET_BIT=$[$NET_MASK%8]
 IP_SUB_HOST_BIT=$[8-$NET_MASK%8]
 
-echo IP_SUB_NET_BIT=$IP_SUB_NET_BIT
-echo IP_SUB_HOST_BIT=$IP_SUB_HOST_BIT
+#echo IP_SUB_NET_BIT=$IP_SUB_NET_BIT
+#echo IP_SUB_HOST_BIT=$IP_SUB_HOST_BIT
 
 # 3.网络位不变，主机位全为0
 AVAILABLE_MIN_IP=$(echo $IP_SUB_BINARY|head -c${IP_SUB_NET_BIT} |xargs printf "ibase=2;%s`echo 00000000 |head -c${IP_SUB_HOST_BIT}`\n"|bc)
-echo AVAILABLE_MIN_IP=$AVAILABLE_MIN_IP
+#echo AVAILABLE_MIN_IP=$AVAILABLE_MIN_IP
 
 # 与操作 生成连续重复的字符串有什么好办法没?
-R_NET_MASK=
-R_HOST_MASK=
-R_MASK=
+#R_NET_MASK=
+#R_HOST_MASK=
+#R_MASK=
 #for i in `seq ${IP_SUB_NET_BIT}`;do
 #	R_NET_MASK+=1
 #done
@@ -77,7 +77,7 @@ R_MASK=
 
 # 网络位不变，主机位全为1
 AVAILABLE_MAX_IP=$(echo $IP_SUB_BINARY|head -c${IP_SUB_NET_BIT} |xargs printf "ibase=2;%s`echo 11111111 |head -c${IP_SUB_HOST_BIT}`\n"|bc)
-echo AVAILABLE_MAX_IP=$AVAILABLE_MAX_IP
+#echo AVAILABLE_MAX_IP=$AVAILABLE_MAX_IP
 
 # 4.输出可用地址范围
 case $IP_INDEX in
