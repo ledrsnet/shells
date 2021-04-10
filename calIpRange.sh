@@ -21,7 +21,7 @@ NET_MASK=`echo $IP_MASK |sed -En 's/^(.*)\/([0-9]{1,2})/\2/p'`
 #echo IP_MASK=$IP_MASK
 #echo IP=$IP
 #echo NET_MASK=$NET_MASK
-if [[ ! $IP =~ ^((1?[0-9]{1,2}|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9]{1,2}|2[0-4][0-9]|25[0-5])$ ]];then
+if [[ ! $IP =~ ^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$ ]];then
    echo  "Ip address $IP is invalid . Useage: ip/mask" 
    exit 2
 elif [ $NET_MASK -gt 32 -o $NET_MASK -lt 0 ];then
