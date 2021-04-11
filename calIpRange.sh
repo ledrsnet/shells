@@ -12,9 +12,14 @@
 #     
 #########################################################
 
-set -eu
+#set -eu
 
 # 1.ip掩码拆分并进行健壮性判断
+E_NOARGS=65
+if [ -z "$1" ];then
+    echo "Usage:`basename $0` ip/mask"
+    exit $E_NOARGS
+fi
 IP_MASK=$1
 IP=`echo $IP_MASK |sed -En 's/^(.*)\/([0-9]{1,2})/\1/p'`
 NET_MASK=`echo $IP_MASK |sed -En 's/^(.*)\/([0-9]{1,2})/\2/p'`
