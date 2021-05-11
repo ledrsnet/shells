@@ -42,7 +42,7 @@ failed)
     echo
     ;;
 *)
-    echo "Usage: `basename $0` ok|failed,return string with color."
+    echo "Usage: `basename $0` String ok|failed,return string with color."
     ;;
 esac
 }
