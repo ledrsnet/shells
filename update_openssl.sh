@@ -29,7 +29,7 @@ tar -zxvf /opt/packages/openssl-OpenSSL_1_0_2u.tar.gz -C /opt/software
 cd /opt/software/openssl-OpenSSL_1_0_2u
 ./config --prefix=/usr/local/openssl shared zlib
 make depend
-make & make install
+make && make install
 mv /usr/bin/openssl /usr/bin/openssl.bak
 mv /usr/include/openssl /usr/include/openssl.bak
 ln -s /usr/local/openssl/bin/openssl /usr/bin/openssl
