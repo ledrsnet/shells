@@ -18,11 +18,11 @@ WEIGHT=100
 ALIGN="-" # - align left; "" align right
 
 
-getOkFailed(){
+action(){
 local tempvar=`echo $2|tr 'A-Z' 'a-z'`
 local length=${#1}
 case $tempvar in
-ok)
+true)
     if [ $length -ge 100 ]; then
         echo "$1"
         printf "%${ALIGN}${WEIGHT}s" && printf "[$GREEN  OK  $END]"
@@ -32,7 +32,7 @@ ok)
     echo
     ;;
 
-failed)
+false)
     if [ $length -ge 100 ]; then
         echo "$1"
         printf "%${ALIGN}${WEIGHT}s" && printf "[${RED}FAILED$END]"
@@ -42,7 +42,7 @@ failed)
     echo
     ;;
 *)
-    echo "Usage: `basename $0` String ok|failed,return string with color."
+    echo "Usage: `basename $0` String true|false,return string with color."
     ;;
 esac
 }
