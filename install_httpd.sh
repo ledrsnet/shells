@@ -29,10 +29,10 @@ CPUS=`lscpu |awk '/^CPU\(s\)/{print $2}'`
 preCompile(){
 echo 安装相关编译环境包..
 if [ `awk -F'"' '/^ID=/{print $2}' /etc/os-release` == "centos" ] &> /dev/null;then
- yum -y install gcc make pcre-devel openssl-devel expat-devel wget bzip2
+ yum -y install gcc make pcre-devel openssl-devel expat-devel wget bzip2
 else
  apt update
- apt -y install gcc make libapr1-dev libaprutil1-dev libpcre3 libpcre3-dev libssl-dev wget
+ apt -y install gcc make libapr1-dev libaprutil1-dev libpcre3 libpcre3-dev libssl-dev wget
 fi
 for i in ${packages[*]};do
     wget $i
