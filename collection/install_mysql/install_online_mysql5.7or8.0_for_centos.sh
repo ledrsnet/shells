@@ -12,7 +12,7 @@
 #MySQL Download URL: https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.29-linux-glibc2.12-x86_64.tar.gz
 #http://mirrors.163.com/mysql/Downloads/MySQL-5.7/mysql-5.7.31-linux-glibc2.12-x86_64.tar.gz
 #http://mirrors.163.com/mysql/Downloads/MySQL-8.0/mysql-8.0.23-linux-glibc2.12-x86_64.tar.xz
-. /etc/init.d/functions
+. printok.sh
 SRC_DIR=`pwd`
 MYSQL='mysql-5.7.33-linux-glibc2.12-x86_64.tar.gz'
 URL=http://mirrors.163.com/mysql/Downloads/MySQL-5.7
