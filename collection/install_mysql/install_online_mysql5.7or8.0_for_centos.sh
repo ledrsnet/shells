@@ -42,7 +42,7 @@ fi
 }
 install_mysql(){
   $COLOR"开始安装MySQL数据库..."$END
-yum  -y -q install libaio numactl-libs 
+yum  -y -q install libaio numactl-libs ncurses-compat-libs
   cd $SRC_DIR
  tar xf $MYSQL -C /usr/local/
   MYSQL_DIR=`echo $MYSQL| sed -nr 's/^(.*[0-9]).*/\1/p'`
