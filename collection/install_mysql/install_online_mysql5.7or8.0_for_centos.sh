@@ -72,8 +72,7 @@ EOF
  chkconfig mysqld on
   service mysqld start
  [ $? -ne 0 ] && { $COLOR"数据库启动失败，退出!"$END;exit; }
-  MYSQL_OLDPASSWORD=`awk '/A temporary password/{print $NF}'
-/data/mysql/mysql.log`
+  MYSQL_OLDPASSWORD=`awk '/A temporary password/{print $NF}' /data/mysql/mysql.log`
  mysqladmin  -uroot -p$MYSQL_OLDPASSWORD password $MYSQL_ROOT_PASSWORD&>/dev/null
  action "数据库安装完成"
 }
