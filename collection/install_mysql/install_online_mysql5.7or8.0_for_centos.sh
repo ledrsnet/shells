@@ -48,7 +48,7 @@ yum  -y -q install libaio numactl-libs
   MYSQL_DIR=`echo $MYSQL| sed -nr 's/^(.*[0-9]).*/\1/p'`
   ln -s /usr/local/$MYSQL_DIR /usr/local/mysql
   chown -R root.root /usr/local/mysql/
- id mysql &> /dev/null || { useradd -s /sbin/nologin -r mysql ; action "创建mysql用户"; }
+ id mysql &> /dev/null || { useradd -s /sbin/nologin -r mysql ; action "创建mysql用户" true; }
    
   echo 'PATH=/usr/local/mysql/bin/:$PATH' > /etc/profile.d/mysql.sh
  . /etc/profile.d/mysql.sh
@@ -74,7 +74,7 @@ EOF
  [ $? -ne 0 ] && { $COLOR"数据库启动失败，退出!"$END;exit; }
   MYSQL_OLDPASSWORD=`awk '/A temporary password/{print $NF}' /data/mysql/mysql.log`
  mysqladmin  -uroot -p$MYSQL_OLDPASSWORD password $MYSQL_ROOT_PASSWORD&>/dev/null
- action "数据库安装完成"
+ action "数据库安装完成" true
 }
 check
 install_mysql
