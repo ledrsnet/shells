@@ -17,7 +17,7 @@ fileName=memcached-1.2.8-repcached-2.2.1
 suffix=.tar.gz
 srcDir=/usr/local/src
 appPath=/apps/repcached
-peerAddress=10.0.0.7
+peerAddress=10.0.0.17
 
 cd $srcDir || exit 2;
 yum install -y gcc libevent libevent-devel
@@ -43,13 +43,13 @@ CACHESIZE="2048"
 OPTIONS="-x $peerAddress"
 EOF
 
-cat > /lib/systemd/system/memcached.service <<EOF
+cat > /lib/systemd/system/repcached.service <<EOF
 [Unit]
 Description=memcached daemon
 Before=httpd.service
 After=network.target
 [Service]
-EnvironmentFile=/etc/sysconfig/memcached
+EnvironmentFile=/etc/sysconfig/repcached
 ExecStart=$appPath/bin/memcached -p \${PORT} -u \${USER} -m \${CACHESIZE} -c \${MAXCONN} \$OPTIONS
 [Install]
 WantedBy=multi-user.target
