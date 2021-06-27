@@ -50,4 +50,4 @@ WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl enable --now memcached.service && action "Memcached编译安装成功"
+systemctl enable --now memcached.service && action "Memcached编译安装成功" || action "Memcached编译安装失败"
