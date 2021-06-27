@@ -55,6 +55,8 @@ ExecStart=$appPath/bin/memcached -p \${PORT} -u \${USER} -m \${CACHESIZE} -c \${
 WantedBy=multi-user.target
 EOF
 
+systemctl daemon-reload
+systemctl enable --now repcached
 
 if [ $? -eq 0 ];then
         action "repcached编译安装并启动成功!"
