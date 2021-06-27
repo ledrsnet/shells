@@ -35,10 +35,29 @@ source /etc/profile.d/repcached.sh
 
 useradd -r -s /sbin/nologin memcached
 
-$appPath/bin/memcached -d -m 2048 -p 11211 -u memcached -c 2048 -x $peerAddress
+cat > /etc/sysconfig/repcached <<EOF
+PORT="11211"
+USER="memcached"
+MAXCONN="2048"
+CACHESIZE="2048"
+OPTIONS="-x $peerAddress"
+EOF
+
+cat > /lib/systemd/system/memcached.service <<EOF
+[Unit]
+Description=memcached daemon
+Before=httpd.service
+After=network.target
+[Service]
+EnvironmentFile=/etc/sysconfig/memcached
+ExecStart=$appPath/bin/memcached -p \${PORT} -u \${USER} -m \${CACHESIZE} -c \${MAXCONN} \$OPTIONS
+[Install]
+WantedBy=multi-user.target
+EOF
+
 
 if [ $? -eq 0 ];then
-    action "repcached编译安装并启动成功!"
+        action "repcached编译安装并启动成功!"
 else
-    action "repcached编译安装启动失败!" false
-fi
+        action "repcached编译安装启动失败!" false
+fi 
