@@ -43,8 +43,7 @@ Before=httpd.service
 After=network.target
 [Service]
 EnvironmentFile=/etc/sysconfig/memcached
-ExecStart=$appPath/bin/memcached -p \${PORT} -u \${USER} -m \${CACHESIZE} -c \${MAXCONN} \
-$OPTIONS
+ExecStart=$appPath/bin/memcached -p \${PORT} -u \${USER} -m \${CACHESIZE} -c \${MAXCONN} \$OPTIONS
 [Install]
 WantedBy=multi-user.target
 EOF
