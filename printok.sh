@@ -1,44 +1,44 @@
 #!/bin/bash
-# 
-#####################################################################
-#
-#Author:                LiangDong
-#Email:                 395539184@qq.com
-#Date:                  2021-04-17
-#FileName：             printok.sh
-#URL:                   https://github.com/ledrsnet
-#Description：          
-#Copyright (C):         2021 All rights reserved
-#
-#####################################################################
 RED="\e[1;31m"
 GREEN="\e[1;32m"
 END="\e[0m"
-WEIGHT=100
+WEIGHT=80
 ALIGN="-" # - align left; "" align right
+RES_COL=80
 
 
 action(){
 local tempvar=`echo $2|tr 'A-Z' 'a-z'`
 local length=${#1}
 case $tempvar in
-true)
+*true)
     if [ $length -ge 100 ]; then
-        echo "$1"
-        printf "%${ALIGN}${WEIGHT}s" && printf "[$GREEN  OK  $END]"
+    ¦   echo "$1"
+    ¦   #printf "%${ALIGN}${WEIGHT}s" && printf "[$GREEN  OK  $END]"
+    ¦   echo -en \\033[${RES_COL}G
+    ¦   printf "[$GREEN  OK  $END]"
     else
-        printf "%${ALIGN}${WEIGHT}s" "$1" && printf "[$GREEN  OK  $END]"
+    ¦   #printf "%${ALIGN}${WEIGHT}s" "$1" && printf "[$GREEN  OK  $END]"
+    ¦   echo -n "$1"
+    ¦   echo -en \\033[${RES_COL}G
+    ¦   printf "[$GREEN  OK  $END]"
     fi
     echo
     ;;
 
-false)
+*false)
     if [ $length -ge 100 ]; then
-        echo "$1"
-        printf "%${ALIGN}${WEIGHT}s" && printf "[${RED}FAILED$END]"
+    ¦   echo "$1"
+    ¦   #printf "%${ALIGN}${WEIGHT}s" && printf "[${RED}FAILED$END]"
+    ¦   echo -en \\033[${RES_COL}G
+    ¦   printf "[${RED}FAILED$END]"
     else
-        printf "%${ALIGN}${WEIGHT}s" "$1" && printf "[${RED}FAILED$END]"
+    ¦   #printf "%${ALIGN}${WEIGHT}s" "$1" && printf "[${RED}FAILED$END]"
+    ¦   echo -n "$1"
+    ¦   echo -en \\033[${RES_COL}G
+    ¦   printf "[${RED}FAILED$END]"
     fi
+
     echo
     ;;
 *)
